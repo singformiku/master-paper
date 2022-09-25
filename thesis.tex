@@ -1,0 +1,104 @@
+\documentclass[oneside]{nthuthesis}
+
+\usepackage{float}
+\usepackage{times}
+\usepackage{verbatim}
+\usepackage{color}
+\usepackage{url}
+\usepackage{graphicx}
+\usepackage{array}
+\usepackage{wallpaper} 
+\usepackage{cite}
+\usepackage{caption}
+\usepackage{multirow}
+\usepackage{makecell}
+\usepackage{hhline}
+\usepackage{rotating}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{mathrsfs}
+% \usepackage{subfigure}
+\usepackage{emptypage}
+\usepackage{subcaption}
+\usepackage{graphicx}
+
+% @article{Dalitz:2008:CSoSRA,
+%     author = "Dalitz, Christoph and Droettboom, Michael and Pranzas, Bastian and Fujinaga, Ichiro",
+%     title = "A Comparative Study of Staff Removal Algorithms",
+%     journal = "IEEE Trans. Pattern Analysis and Machine Intelligence",
+%     volume = "30",
+%     pages = "753-766",
+%     year = "2008"
+% }
+% declare the path(s) where your graphic files are
+\graphicspath{{./figsrc/}}
+% and their extensions so you won't have to specify these with
+% every instance of \includegraphics
+% \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+
+% Using the tex-text mapping for ligatures etc.
+\defaultfontfeatures{Mapping=tex-text}
+
+% Set the default fonts
+
+% English font
+% Note: please refer to 'fc-list :outline -f "%{family}\n"' for choosing a valid font name
+\usepackage{fontspec}
+\setmainfont{Times New Roman.ttf}
+% \setmainfont{Times New Roman}
+
+% Chinese font
+% Note: please refer to 'fc-list :outline -f "%{family}\n"' for choosing a valid font name
+\setCJKmainfont[AutoFakeBold=3,AutoFakeSlant=.4]{kaiu.ttf}
+\defaultCJKfontfeatures{AutoFakeBold=6,AutoFakeSlant=.4}
+
+
+\CenterWallPaper{0.25}{nthulogo.png}
+
+
+% Your information goes here
+\input{nthuvars}
+
+\begin{document}
+
+\frontmatter
+
+\makecover
+% \makecopyright
+
+% \input{acknowledgements}
+
+\input{abstract}
+
+{\singlespacing
+\tableofcontents
+\listoffigures
+\listoftables
+}
+
+\mainmatter
+
+% Your thesis goes here
+\input{introduction}
+\input{related-work}
+
+\input{system-design-and-implementation}
+% \input{omr-overview}
+
+% \input{discussion}
+% \input{conclusion}
+
+\appendix
+
+\backmatter
+
+\renewcommand{\bibname}{References}
+\addcontentsline{toc}{chapter}{\bibname}
+\bibliographystyle{ieeetr}
+
+% Your bibliography goes here
+{\singlespacing
+ \bibliography{thesis}
+}
+
+\end{document}

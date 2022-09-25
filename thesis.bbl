@@ -1,0 +1,144 @@
+\begin{thebibliography}{10}
+
+\bibitem{iot-intro-02}
+ {\em Hany F. Atlam, Gary B. Wills,”Chapter Three - Intersections between IoT
+  and distributed ledger” Advances in Computers, vol. 115, Pages 73-113,
+  2019}.
+
+\bibitem{rtmp-intro-01}
+ {\em RTMP introduction,
+  https://www.wowza.com/blog/rtmp-streaming-real-time-messaging-protocol}.
+
+\bibitem{mqtt-data-flow}
+ {\em N. Naik, 'Choice of effective messaging protocols for IoT systems: MQTT,
+  CoAP, AMQP and HTTP,' 2017 IEEE International Systems Engineering Symposium
+  (ISSE), 2017, pp. 1-7}.
+
+\bibitem{agri-wiki}
+``agriculture,'' {\em https://en.wikipedia.org/wiki/Agriculture}.
+
+\bibitem{agri-history}
+ {\em Diamond, J. Evolution, consequences and future of plant and animal
+  domestication. Nature 418, 700–707 (2002)}.
+
+\bibitem{argi-pop}
+ {\em World population, https://www.worldometers.info/world-population/}.
+
+\bibitem{agri-pop2}
+ {\em Borlaug, N. E. 2000. The green revolution revisited and the road ahead.
+  Special 30th Anniversary Lecture, Norwegian Nobel Institute, Oslo.}
+
+\bibitem{agri-stock}
+ {\em Livestock, https://en.wikipedia.org/wiki/Livestock}.
+
+\bibitem{agri-stock2}
+ {\em Suryawanshi, K., Redpath, S., Bhatnagar, Y., Ramakrishnan, U.,
+  Chaturvedi, V., Smout, S., Mishra, C., 2017. Impact of wild prey availability
+  on livestock predation by snow leopards. Roy. Soc. Open Sci. 4 (6).}
+
+\bibitem{crop-fail}
+ {\em Bourne, J. E. 2015. The End of Plenty: The Race to Feed a Crowded World.
+  W. W.Norton}.
+
+\bibitem{fish-labour}
+ {\em FAO, b. Monitoring, record keeping, accounting and marketing.}
+
+\bibitem{agri-ai}
+ {\em C. -W. Hsu, Y. -H. Huang and N. -F. Huang, 'Real-time Dragonfruit’s
+  Ripeness Classification System with Edge Computing Based on Convolution
+  Neural Network,' 2022 International Conference on Information Networking
+  (ICOIN), 2022, pp. 177-182,}.
+
+\bibitem{fish-paper}
+ {\em Omar Anas, Youssef Wageeh, Hussam El-Din Mohamed, Ali Fadl, Noha ElMasry,
+  Ayman Nabil, Ayman Atia, Detecting Abnormal Fish Behavior Using Motion
+  Trajectories In Ubiquitous Environments, Procedia Computer Science, Volume
+  175, 2020, Pages 141-148,}.
+
+\bibitem{cow-paper}
+ {\em Gu J Q, Wang Z H, Gao R H, Wu H R. Cow behavior recognition based on
+  image analysis and activities. Int J Agric \& Biol Eng, 2017; 10(3):
+  165–174.}
+
+\bibitem{hens-paper}
+ {\em Leroy T, Vranken E. A computer vision method for on-line behavioral
+  quantification of individually caged poultry. Transactions of the ASABE,
+  2006; 49(3): 795–802}.
+
+\bibitem{agri-web}
+ {\em Smart Farming Platform, https://nthu-smart-farming.kits.tw/.}
+
+\bibitem{aws}
+ {\em AWS cloud service, https://aws.amazon.com/tw/}.
+
+\bibitem{iot-intro-01}
+ {\em Gillis, Alexander (2021). 'What is internet of things (IoT)?'. IOT
+  Agenda. Retrieved 17 August 2021.}
+
+\bibitem{rtsp-intro-01}
+ {\em InfoWorld Media Group, Inc. (2 March 1998). InfoWorld. InfoWorld Media
+  Group, Inc. p. 18. ISSN 0199-6649.}
+
+\bibitem{rtsp-intro-02}
+ {\em Rafael Osso (1999). Handbook of Emerging Communications Technologies: The
+  Next Decade. CRC Press. p. 42. ISBN 978-1-4200-4962-6.}
+
+\bibitem{rtmp-inventor}
+ {\em Macromedia, https://en.wikipedia.org/wiki/Macromedia}.
+
+\bibitem{mqtt-intro}
+ {\em MQTT, https://mqtt.org/}.
+
+\bibitem{pub-sub}
+ {\em Pub-sub pattern,
+  https://en.wikipedia.org/wiki/Publish-subscribe\_pattern}.
+
+\bibitem{uav-wiki}
+ {\em UAVs, https://en.wikipedia.org/wiki/Unmanned\_aerial\_vehicle}.
+
+\bibitem{genbest-LTD}
+ {\em GenBest Technology digital video recording system,
+  http://www.genbest.com.tw/genbest/dvr/ec.htm}.
+
+\bibitem{luda-farm}
+ {\em Luda farm, https://www.luda.farm/farm-video-surveillance/}.
+
+\bibitem{wildlife-paper}
+ {\em G. Chen, T. X. Han, Z. He, R. Kays and T. Forrester, 'Deep convolutional
+  neural network based species recognition for wild animal monitoring,'' 2014
+  IEEE International Conference on Image Processing (ICIP), 2014, pp. 858-862}.
+
+\bibitem{aws-s3}
+ {\em AWS S3, https://aws.amazon.com/tw/s3/}.
+
+\bibitem{aws-lambda}
+ {\em AWS lambda, https://aws.amazon.com/tw/lambda/}.
+
+\bibitem{aws-greengrass}
+ {\em AWS greengrass, https://aws.amazon.com/tw/greengrass/}.
+
+\bibitem{line-notify}
+ {\em Line notify, https://notify-bot.line.me/zh-TW/}.
+
+\bibitem{speed-dome}
+ {\em Speed dome, http://www.hertone.com/home/?page\_id=161}.
+
+\bibitem{hertone-LTD}
+ {\em Hertone company, http://www.hertone.com/home/}.
+
+\bibitem{pi}
+ {\em Raspberry Pi, https://en.wikipedia.org/wiki/Raspberry\_Pi}.
+
+\bibitem{ossr}
+ {\em Ossrs, https://github.com/ossrs/srs}.
+
+\bibitem{opencv}
+ {\em openCV, https://opencv.org/}.
+
+\bibitem{aws-dynamodb}
+ {\em AWS DynamoDB, https://aws.amazon.com/tw/dynamodb/}.
+
+\bibitem{websocket}
+ {\em WebSocket, https://zh.wikipedia.org/zh-tw/WebSocket}.
+
+\end{thebibliography}

@@ -8,7 +8,7 @@
 
 \section{System overview}
 % 講大概的圖是在幹麼
-Fig.~\ref{fig:big-system} shows the schematic diagram of the whole system. We will first introduce smart farm platform because this is where we implement our system. Second, we briefly introduce each components in the system. Third, we will describe the user cases which we designed and the sequence diagram behind each case, including critical case. At last, we focus on the detail design of PI and recording server.
+Fig.~\ref{fig:big-system} shows the schematic diagram of the whole system. We will first introduce smart farm platform because this is where we implement our system. Second, we will briefly introduce each components in the system. Third, we will describe the user cases which we designed and the sequence diagram of the whole recording process behind each case, including critical corner case. At last, we explain the detail design of PI and Recording server.
 
 \begin{figure}[H]
     \centering
@@ -33,7 +33,7 @@ Speed dome~\cite{speed-dome} is a Pan/Tilt/Zoom(PTZ) doom camera bought in herto
 
 %     PI
 \subsection{Raspberry PI}
-Raspberry Pi~\cite{pi} is a series of small single-board computers which is cheaper than standard personal computer as shown in Fig.~\ref{fig:pi}. It is placed in experimental field with Speed dome. PI acts as a edge management device. It recieves command from other servers by MQTT~\cite{mqtt-intro} protocol then commands camera by API request and recording server to execute. Spec of CPU is Quad core, ARM Cortex-A72(v8) 64bytes 1.5GHz and RAM is 4GB LPDDR4-2400 SDRAM and storage is 16 GB MicroSD.
+Raspberry Pi~\cite{pi} is a series of small single-board computers which is cheaper than standard personal computer as shown in Fig.~\ref{fig:pi}. It is placed in experimental field with Speed dome. PI acts as a edge management device. It recieves command from other servers by MQTT~\cite{mqtt-intro} protocol then commands camera by API request and Recording server to execute. Spec of CPU is Quad core, ARM Cortex-A72(v8) 64bytes 1.5GHz and RAM is 4GB LPDDR4-2400 SDRAM and storage is 16 GB MicroSD.
 
 \begin{figure}[H]
     \centering
@@ -48,7 +48,7 @@ Video streaming server~\cite{ossr} is open sourcing streaming server. It is a si
 
 %     recording server
 \subsection{Recording server}
-Recording server receives command from PI. It is reponsible to pull live streaming from video streaming server then make into video file. After finish recording, it upload file to AWS S3. Our recording process uses the feature of OpenCV~\cite{opencv} as our backbone. It has some advantage such as easy to use, Support multi stream protocol(RTMP, RTSP …etc.) and less bug.
+Recording server receives command from PI. It is reponsible to pull live streaming from Video streaming server then make into video file. After finish recording, it upload file to AWS S3. Our recording process uses the feature of OpenCV~\cite{opencv} as our backbone. It has some advantage such as easy to use, Support multi stream protocol(RTMP, RTSP …etc.) and less bug.
 
 %     API server
 %     Front end
@@ -77,7 +77,7 @@ In this user case, User will click the recording button in the streaming web pag
     \caption{Click start button to start recording and Press stop button to stop\label{fig:manual-case}}
 \end{figure}
 
-As shown in Fig.~\ref{fig:manual-sequece-diagram}, we show the data flow of the whole system from starting the recording task to terminate it. In this manual case, there are 5 components involved, Front-end server, API server(Back-end server), Raspberry PI, Recording system and Video streaming server. When Front-end server sends API request, Back-end will query PI for the permission of the camera. If PI allows the request, it will inform Back-end server that it allows to recieve recording request. Front-end will recieve permission response from Back-end then start to initiate WebSocket~\cite{websocket} connection with Back-end. After WebSocket connection is complete, Back-end will send MQTT record command to PI to start recording process. PI will inform recording server to start connection with streaming server and wait until the connection is complete. Recording system will inform PI that connection is complete then PI will inform recording system to start recording. At the same time, PI will also inform Front-end that the recording process has started. If user want to terminate the recording task, he/she can press the stop button. Front-end will disconnect WebSoceket. When Back-end detect WebSocket connection has been shut down, it will send stop command to inform PI to stop the process. At last, recording system will stop connection with Video streaming server then upload the video file to AWS S3~\cite{aws-s3}.
+As shown in Fig.~\ref{fig:manual-sequece-diagram}, we show the data flow of the whole system from starting the recording task to terminate it. In this manual case, there are 5 components involved, Front-end server, API server(Back-end server), Raspberry PI, Recording server and Video streaming server. When Front-end server sends API request, Back-end will query PI for the permission of the camera. If PI allows the request, it will inform Back-end server that it allows to recieve recording request. Front-end will recieve permission response from Back-end then start to initiate WebSocket~\cite{websocket} connection with Back-end. After WebSocket connection is complete, Back-end will send MQTT record command to PI to start recording process. PI will inform Recording server to start connection with streaming server and wait until the connection is complete. Recording server will inform PI that connection is complete then PI will inform Recording server to start recording. At the same time, PI will also inform Front-end that the recording process has started. If user want to terminate the recording task, he/she can press the stop button. Front-end will disconnect WebSoceket. When Back-end detect WebSocket connection has been shut down, it will send stop command to inform PI to stop the process. At last, Recording server will stop connection with Video streaming server then upload the video file to AWS S3~\cite{aws-s3}.
 
 \begin{figure}[H]
     \centering
@@ -119,7 +119,7 @@ In this case, recording process will start if specific event occured. User have 
     \label{fig:event-userflow}
 \end{figure}
 
-We will also show the sequence diagram of event case below from registering event to recording process terminated in Fig.~\ref{fig:event-sequence-diagram}. In this case, there are 6 components involved, Front-end server, API server(Back-end server), Scheduling server, Raspberry PI, Recording system and Video streaming server. When user register a event, Back-end will send the event information, including camera angle, recording duration and task type, to scheduling server. When event occured, scheduling server will send recording request to recording server. Similar to manual case, PI will inform recording server to start connection with streaming server and wait until the connection is complete. Recording system will inform PI that connection is complete then PI will inform recording system to start recording for X seconds. Recording server will shut down video process when time's up. At last, recording system will stop connection with Video streaming server then upload the video file to AWS S3.
+We will also show the sequence diagram of event case below from registering event to recording process terminated in Fig.~\ref{fig:event-sequence-diagram}. In this case, there are 6 components involved, Front-end server, API server(Back-end server), Scheduling server, Raspberry PI, Recording server and Video streaming server. When user register a event, Back-end will send the event information, including camera angle, recording duration and task type, to scheduling server. When event occured, scheduling server will send recording request to Recording server. Similar to manual case, PI will inform Recording server to start connection with streaming server and wait until the connection is complete. Recording server will inform PI that connection is complete then PI will inform Recording server to start recording for X seconds. Recording server will shut down video process when time's up. At last, Recording server will stop connection with Video streaming server then upload the video file to AWS S3.
 
 \begin{figure}[H]
     \centering
@@ -162,7 +162,7 @@ In this case, record process will be triggered at a specific timing. Similar to 
     \label{fig:time-userflow}
 \end{figure}
 
-Similar to event trigger case, it has 6 components, Front-end server, API server(Back-end server), Scheduling server, Raspberry PI, Recording system and Video streaming server. The sequence diagram is shown below. In Fig.~\ref{fig:time-sequence-diagram}, when user reigister time setting, Back-end will update the information whilch is identical to event trigger case except the task ID to schduling server. When the time comes, scheduling server will send recording request to PI then do the exact same process in event triggered case. PI will inform recording server to start connection with streaming server and wait until the connection is complete. Recording system will inform PI that connection is complete then PI will inform recording system to start recording for X seconds. Recording server will shut down video process when time's up. At last, recording system will stop connection with Video streaming server then upload the video file to AWS S3.
+Similar to event trigger case, it has 6 components, Front-end server, API server(Back-end server), Scheduling server, Raspberry PI, Recording server and Video streaming server. The sequence diagram is shown below. In Fig.~\ref{fig:time-sequence-diagram}, when user reigister time setting, Back-end will update the information whilch is identical to event trigger case except the task ID to schduling server. When the time comes, scheduling server will send recording request to PI then do the exact same process in event triggered case. PI will inform Recording server to start connection with streaming server and wait until the connection is complete. Recording server will inform PI that connection is complete then PI will inform Recording server to start recording for X seconds. Recording server will shut down video process when time's up. At last, Recording server will stop connection with Video streaming server then upload the video file to AWS S3.
 
 \begin{figure}[H]
     \centering
@@ -172,7 +172,7 @@ Similar to event trigger case, it has 6 components, Front-end server, API server
 
 % 1個special case: preemptive
 \subsection{Critical case: Preemptive case}
-We have shown normal cases that run on our system. Here, we want to point out a special situation. Normally, camera is only capable of executing one recording request. As shown in Fig.~\ref{fig:preemptive-example}, What if there are multiple recording request inbond at the same time?(e.g. At the moment, user A and B want to record manually and an event also trigger the recording process.) It is obvious that camera cannot handle more than one recording request. It doesn't know that which tasks should be executed. We implement priority method to handle such situation in Raspberry PI. If there are multiple cases, PI can check the importance of each task to decide which task can be executed. For example, PI is running task A. Next, task B comes in and request to record. PI will compare the importance, or prioirty, between task A and B. If B is lower than A, PI will reject the request from B. If B is higher than A, PI will stop task A and turn the permission to task B.
+We have shown normal cases that run on our system. Here, we want to point out a special situation. Normally, camera is only capable of executing one recording request. As shown in Fig.~\ref{fig:preemptive-example}, What if there are multiple recording request inbond at the same time?(e.g. At the moment, user A and B want to record manually and an event also trigger the recording process.) It is obvious that camera cannot handle more than one recording request. It doesn't know that which tasks should be executed. We implement priority method to handle such situation in Raspberry PI. If there are multiple tasks, PI can check the importance of each task to decide which task can be executed. For example, PI is running task A. Next, task B comes in and request to record. PI will compare the importance, or prioirty, between task A and B. If B is lower than A, PI will reject the request from B. If B is higher than A, PI will stop task A and turn the permission to task B.
 
 
 \begin{figure}[H]
@@ -181,7 +181,90 @@ We have shown normal cases that run on our system. Here, we want to point out a 
     \caption{3 requests come at the same time \label{fig:preemptive-example}}
 \end{figure}
 
-% PI
+We will give a preemptive example by showing sequence diagram below. Fig.~\ref{fig:preemptive-a} shows user A requesting recording task at the beginning. PI will execute user A's record as we have shown in maunal case since there are no other tasks yet. Afer Fig.~\ref{fig:preemptive-a}, There will be two cases occured when second user comes in, Fig.~\ref{fig:preemptive-B-higher} and Fig.~\ref{fig:preemptive-B-lower}. Fig.~\ref{fig:preemptive-B-higher} is the case that second user has higher priority and Fig.~\ref{fig:preemptive-B-lower} is the opposite case. 
+
+In Fig.~\ref{fig:preemptive-B-higher} case, user B sends permission checking to PI. PI knows that user A is currently occupying the task, so it checks the priority between A and B. It finds out that B is more important than A, so it returns permission to User B. After user B recieves permission, it starts to build WebSocket connection with Back-end. Back-end sends record command to PI. Since user B have higher priority than user A, PI will order Recording server to stop user A's process. Recording server will stop recording and upload user A's video file then PI will inform Back-end to stop WebSocket connection with User A. User A's web page will recieve a warning from Back-end that the task have been forced to shut down. After PI closes user A's task, it will inform user B that recording task is started and order Recording server to start a new task.
+
+In Fig.~\ref{fig:preemptive-B-lower} case, user B sends permission checking to PI. PI knows that user A is currently occupying the task, so it checks the priority between A and B. It finds out that A is more important than B, so it rejects user B's request and let Recording server keep recording user A's task.
+
+\begin{figure}[H]
+    \centering
+    \begin{subfigure}{\textwidth}
+        \includegraphics[width=\textwidth]{figsrc/preemptive-a.png}
+        \subcaption{User A requests record}
+        \label{fig:preemptive-a}
+    \end{subfigure}
+
+    % \caption{User flow of time period triggered case(cont.)}
+    % \label{fig:time-userflow}
+\end{figure}
+
+\begin{figure}[H]
+    \ContinuedFloat
+    \centering
+    \begin{subfigure}{\textwidth}
+        \includegraphics[width=\textwidth]{figsrc/preemptive-B-higher.png}
+        \subcaption{User B with higher priority}
+        \label{fig:preemptive-B-higher}
+    \end{subfigure}
+
+    % \caption{User flow of time period triggered case(cont.)}
+    % \label{fig:time-userflow}
+\end{figure}
+
+\begin{figure}[H]
+    \ContinuedFloat
+    \centering
+    \begin{subfigure}{\textwidth}
+        \includegraphics[width=\textwidth]{figsrc/preemptive-B-lower.png}
+        \subcaption{User B with lower priority}
+        \label{fig:preemptive-B-lower}
+    \end{subfigure}
+
+    \caption{Data flow of preemptive case}
+    \label{fig:preemptive-sequence}
+\end{figure}
+
+We have shown how our system deal with crtical preemptive case. Next, we will explain detail of two main components in our system, raspberry PI and Recording server. 
+
 % record system
+\section{Structure of Recording server}
+Recording server is the core component to perform recording task in the whole system. It is reponsible for recieving command from PI and record live stream from Video streaming server. Our Recording server runs in AWS EC2~\cite{aws-ec2}. Operating System of EC2 VM is Ubuntu22.04. CPU is single Intel(R) Xeon(R) CPU E5-2676 v3 @ 2.40GH. RAM has size of 1 GB. Fig.~\ref{fig:recording-server-diagram} shows the architecture of record server. There are 3 components in it, receiver, master and slave. We will explain the feature of these 3 components. We use Master-Slave Replication to deal with different recording requests. Since Recording server may recieve multiple requests from different PI at the same time. It is important that Recording server is able to record multiple live streaming from Video streaming server simultaneously. 
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figsrc/recording-server-diagram.png}
+    \caption{Structure of Recording server \label{fig:recording-server-diagram}}
+\end{figure}
+
+\subsection{Receiver}
+Reciever is reponsible for getting command from PI which may locates at any experiment field. We implement reciever by paho-mqtt python package~\cite{paho-mqtt} to recieve MQTT message. Addtionally, we also implement a buffer to prevent message overflow.
+
+\subsection{Master}
+Master is responsible for managing the command recieved from PI. It is designed for tackling multiple recording request at the same time. If master recieves new request, it will create new slave to record new stream from Video streaming server. If some slaves finish its tasks, master will terminate the slaves and release their resources.
+
+\subsection{Slave}
+Every single slave is responsible for recording one corresponding stream of camera as shown in Fig.~\ref{fig:recording-server-slave}. We use state machine to implement slave. As shown in Fig.~\ref{fig:recording-server-stg}, There are 4 states in state machine, S0 to S3. When entering a new state, slave will always inform PI to make sure that PI always knows the situation in Recording server. S0 is the initial state when the slave is created by master. It will start connecting to Video streaming server. When it finishes connection, it will inform PI that it is ready to record and switch to S1. S1 is stand by state, it will wait PI's command to shut down or start recording process. S2 is recording state that it will start to record the stream until time's up or stopped by user or replaced by other higher priority task. S3 is the termination state that it will disconnect with Video streaming server and free the resources. S1 and S2 will automatically terminate if they don't get command for a period of time.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figsrc/recording-server-slave.png}
+    \caption{Each slave records one independent stream\label{fig:recording-server-slave}}
+\end{figure}
 
 
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figsrc/recording-server-stg.png}
+    \caption{State transition graph of state machine of slave\label{fig:recording-server-stg}}
+\end{figure}
+
+% PI
+\section{Structure of Raspberry}
+PI not only need to recieve command from Front-end side but also have to coordinate with Recording server. Furthermore, PI even need to deal with preeemptive case. It has to decide which task to execute or terminate. So in order to handle such complex situation, we propose a decision tree that is able to solve the problem as shown in Fig.~\ref{fig:pi-decision-tree}. We use decision tree to indicate how we manage the preemptive case and data between frontend and record server. It will determine how to deal with incoming message. For upper subtree, the message is come from Recording server. It indicates that which state the slave is currently at, so PI will know which command it shall send to Recording server next. If PI finds that the response from Recording server is invalid, it will order Recording server to teminate the slave. For lower subtree, it has three types of command, stop, check and create. Check command will respond to Front-end whether the new task has permission or not. Stop command will stop the recording process in manual case. Create command is more complex than previous two. It will first check whether there is a task which is currently occupying the corresponding camera stream or not. If Recording server is idle, PI will directly send create command to recording server; If Recording server is occupied, PI will check the priority between two task. If new task has lower priority, PI will ignore the new request; If new task has higher priority, PI will order recording server to terminate old task then send new command to execute new task.
+
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=\textwidth]{figsrc/pi-decision-tree.png}
+    \caption{Decision tree of PI\label{fig:pi-decision-tree}}
+\end{figure}

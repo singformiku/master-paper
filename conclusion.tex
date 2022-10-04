@@ -1,0 +1,16 @@
+\chapter{Conclusion and future work}
+\label{c:conclusion}
+
+
+
+
+\if 0
+\bibliography{thesis}
+\graphicspath{{./figsrc/}}
+\fi
+% In this thesis, we proposed a recording streaming system which is efficient, automatic and cloud based. It can preset time scheduling for specific timing to record and register events to trigger record process when sonething critical happened. Also, we use AWS as our cloud service which improve storage limit, difficulty of maintaining system and developing new feature etc.. At last, We can manage all of the camera in experimental field located all over Taiwan.
+
+In this thesis, we proposed an automatic, cloud-based and efficient system that was based on smart farming platform to collect video data for expert analysis or AI model training. We have shown in chapter 2 that there were many related recording streaming system in the world. Although they had some advantage in their own product, it still didn't fit our requirement. Some products were lack of automation and others were lack of cloud support. Our system covered all of the user cases that we could think of, including user cases in other systems. To make the development more easier, we used some native services that were already existed in Smart farming platform(e.g. Video streaming server, scheduling server etc.) then extent these to further implement new functions. We enumerated 3 user cases in our user scenarios, manual case, event trigger case and time triggered case. Addtionally, we even came out with a critical user scenario, preemptive user case. Based on these 3 + 1 cases, we implemented our core components, service in PI and recording server. To deal with preemptive case, we designed PI to make it able to decide which recording task should stay and which to terminate. Addtionally, PI also had the ability to communicate with recording server so that it could know what should do next. For recording server, we had shown that it was responsible of recieving command from PI, reporting server status to PI and executing recording task. To make system more reliable, we use AWS cloud service as our critical backbone. We use DynamoDB to store important meta data for camera and PI; Use S3 to store our video file; Use Greengrass and lambda to deploy our function in PI remotely; Use EC2 to run our recording server.
+
+We have some improvement that can be done in the future. First, the delay time to build connection can be improved. Since it is important for user experience(UX) to not wait too long to start a recording process. Second, video quality can be improved. We can see in DEMO video that the streaming is obscure. We think that our camera is hard to focus on water surface. Third, recording server is capable of running multiple recording tasks at the same time but it cannot run too many. These may become issue if there are more than 5 tasks coming at the same time. Recording server needs a more scalable design.
+

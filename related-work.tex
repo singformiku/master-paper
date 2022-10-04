@@ -42,8 +42,11 @@ Message Queuing Telemetry Transport, also known as MQTT~\cite{mqtt-intro} is a T
 \begin{figure}[H]
     \centering
     \includegraphics[width=\textwidth]{figsrc/mqtt-data-flow.png}
-    \caption{Data flow of MQTT communication~\cite{mqtt-data-flow}.\label{fig:mqtt-data-flow}}
+    \caption{Data flow of MQTT communication~\cite{mqtt-data-flow}\label{fig:mqtt-data-flow}}
 \end{figure}
+
+\section{Related video data set}
+There were some publication that collected video dataset. For example, ~\cite{video-set-01} contains tens of hours of videos for video grounding and action recognition, and 33000 frames for annotating pose estimation. They collected these data by animal enthusiasts and professionals; ~\cite{video-set-02} collected video from youtube. They used these dataset to detect camouflaged objects in videos. ~\cite{video-set-03} collected chicken data by manual recording from June 10–12, 2019, from 9:00 to 17:00. They transformed chicken videos into pictures to train chicken behavior classification. ~\cite{video-set-04} is similar as ~\cite{video-set-03}. They also collected data by manual recording for cattle recognition. We see that ~\cite{video-set-01} is extremely laborious because they need to collect various field of data to cover extensive range of environmental variations. Compared to ~\cite{video-set-03} and ~\cite{video-set-04}, these researches aimed at analyzing more specific species, so the loading for collecting data was much easier. However, we can find that these researches are lack of automatic collecting service. 
 
 \section{Related data collecting streaming system}
 We will enumertate other related data collecting systems in this section and compare the difference of characteristic between us and others.
@@ -114,7 +117,7 @@ We can find out that each system has its benefits and limitations. Our system ha
             \hline
             {\bf } & {\bf GenBest Tech.} & {\bf Luda farm} & {\bf Wild animal recognition} & {\bf Ours} \\
             \hline
-            Camera control flexibility & X & \thead{PTZ, 180 vertical \\ and 360 horizontal}  & X & \thead{PTZ, 180 vertical \\ and 360 horizontal \\ and manual} \\
+            Camera control flexibility & X & \thead{PTZ, 180 vertical \\ and 360 horizontal}  & X & \thead{PTZ, 180 vertical \\ and 360 horizontal} \\
             \hline
             Agility of dynamic record & X & Event triggered & Event triggered & Event triggered, time scheduling \\
             \hline
@@ -142,6 +145,10 @@ We can find out that each system has its benefits and limitations. Our system ha
     }
     \caption{Monitoring-system comparison.\label{table:Monitoring-system}.}
 \end{table}
+
+
+
+
 
 % \section{Streaming control and photo collect scheduling
 %  system}
@@ -200,3 +207,6 @@ We can find out that each system has its benefits and limitations. Our system ha
 %     \end{tabular}
 %     \caption{Deformation Methods\label{table:deformation}.}
 % \end{table}
+
+
+

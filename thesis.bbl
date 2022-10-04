@@ -93,6 +93,25 @@
  {\em Pub-sub pattern,
   https://en.wikipedia.org/wiki/Publish-subscribe\_pattern}.
 
+\bibitem{video-set-01}
+X.~L. Ng, K.~E. Ong, Q.~Zheng, Y.~Ni, S.~Y. Yeo, and J.~Liu {\em Animal
+  Kingdom: A Large and Diverse Dataset for Animal Behavior Understanding}.
+
+\bibitem{video-set-02}
+H.~Lamdouar, C.~Yang, W.~Xie, and A.~Zisserman, ``Betrayed by motion:
+  Camouflaged object discovery via motion segmentation,'' {\em Asian Conference
+  on Computer Vision}, 2020.
+
+\bibitem{video-set-03}
+H.~Z. J. H. K.~C. Cheng~Fang, Tiemin~Zhang {\em Pose estimation and behavior
+  classification of broiler chickens based on deep neural networks}.
+
+\bibitem{video-set-04}
+G.~V. M. A. d. S. O. J. D. A. A. M. V. M. d. O. E. T. M. H. P. U. G. P. d.~A.
+  Fabricio~de Lima~Weber, Vanessa Aparecida de Moraes~Weber {\em Recognition of
+  Pantaneira cattle breed using computer vision and convolutional neural
+  networks}.
+
 \bibitem{uav-wiki}
  {\em UAVs, https://en.wikipedia.org/wiki/Unmanned\_aerial\_vehicle}.
 
@@ -140,5 +159,11 @@
 
 \bibitem{websocket}
  {\em WebSocket, https://zh.wikipedia.org/zh-tw/WebSocket}.
+
+\bibitem{aws-ec2}
+ {\em AWS EC2, https://aws.amazon.com/tw/ec2/}.
+
+\bibitem{paho-mqtt}
+ {\em Python paho-mqtt package, https://github.com/eclipse/paho.mqtt.python}.
 
 \end{thebibliography}

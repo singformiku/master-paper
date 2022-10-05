@@ -76,7 +76,7 @@ In manual case, we will show the situation in Front-end happend in Fig.~\ref{fig
 \subsection{Triggered based record}
 Video DEMO: https://www.youtube.com/watch?v=yN4NbbG5he4
 
-We will show the situation of sequence diagram of Fig.~\ref{fig:time-sequence-diagram} that happened in Front-end. We first set, duration, angle and the timing to record at 1:39PM, one minute later in Fig.~\ref{fig:demo-time-1}. At this moment, Scheduling server will recieve new setting that waits to execute. When time's up, scheduling server will reuqest PI to record. PI turns the camera from Fig.~\ref{fig:demo-time-2} to Fig.~\ref{fig:demo-time-3} at video timestamp 1:00~1:05 then orders recording server to start the process.
+We will show the situation of sequence diagram of Fig.~\ref{fig:time-sequence-diagram} that happened in Front-end. We first set, duration, angle and the timing to record at 1:39PM, one minute later in Fig.~\ref{fig:demo-time-1}. At this moment, Scheduling server will recieve new setting that waits to execute. When time's up, scheduling server will reuqest PI to record. PI turns the camera from Fig.~\ref{fig:demo-time-2} to Fig.~\ref{fig:demo-time-3} at video timestamp 1:00\~1:05 then orders recording server to start the process.
 
 \begin{figure}[H]
     \centering
@@ -153,7 +153,7 @@ We will show how higher priority task preempt lower priority one in Front-end si
 \subsection{Lower preemptive case}
 Video DEMO: https://www.youtube.com/watch?v=1SY6WzD8WKA
 
-We will show how higher priority task preempt lower priority one in Front-end perspective. In Fig.~\ref{fig:demo-lower-1}, we use two web page to simulate two manual recording request. Leftside of the web page will excute with higher priority by pressing forcing executing button at left down corner. In Fig.~\ref{fig:demo-lower-2}, right side user gets recjection when left side user is occupying the resource since its priority is lower than left side user.
+We will show how higher priority task preempt lower priority one in Front-end perspective. In Fig.~\ref{fig:demo-lower-1}, we use two web page to simulate two manual recording request. Leftside of the web page will execute with higher priority by pressing forcing executing button at left down corner. In Fig.~\ref{fig:demo-lower-2}, right side user gets rejection when left side user is occupying the resource since its priority is lower than left side user.
 
 \begin{figure}[H]
     \centering
@@ -190,7 +190,7 @@ Here we will measure our system performance. We divide the whole recording proce
 
 % pre
 \subsection{Phase 1: Permission request}
-In Permission request phase, PI will check whether the user have permission or not. We will measure the time elapsed from http request to http response. We send http request 500 times then get the latency chart below in Fig.~\ref{fig:result-p1}. We can see that the averge time elapsed for requesting permission is 902.856ms and STD is 308.034.
+In Permission request phase, PI will check whether the user have permission or not. We will measure the time elapsed from http request to http response. We send http request 500 times then get the latency chart below in Fig.~\ref{fig:result-p1}. We can see that the average time elapsed for requesting permission is 902.856ms and STD is 308.034.
 
 \begin{figure}[H]
     \centering
@@ -200,7 +200,7 @@ In Permission request phase, PI will check whether the user have permission or n
 
 % build
 \subsection{Phase 2: Build connection}
-In build connection phase, we will measure the time from start sending MQTT recording command until recording server repsonds that it completes connection to streaming server as shown in Fig.~\ref{fig:result-p2-1}. Because recording command and reponse are both sent by MQTT, we use a local device to measure the time elapsed as shown in Fig.~\ref{fig:result-p2-2}. We will subtract the beginning time from the ending time to obtain latency. we repeat the experiment 200 times and each test has 1 minute delay. As shown in Fig.~\ref{fig:result-p2-3}, We see that averge time elasped is 6408ms anf STD is 202. 
+In build connection phase, we will measure the time from start sending MQTT recording command until recording server repsonds that it completes connection to streaming server as shown in Fig.~\ref{fig:result-p2-1}. Because recording command and reponse are both sent by MQTT, we use a local device to measure the time elapsed as shown in Fig.~\ref{fig:result-p2-2}. We will subtract the beginning time from the ending time to obtain latency. we repeat the experiment 200 times and each test has 1 minute interval. As shown in Fig.~\ref{fig:result-p2-3}, We see that average time elasped is 6408ms anf STD is 202. 
 
 \begin{figure}[H]
     \centering
@@ -227,7 +227,7 @@ We will ignore the recording phase since the latency is determined by how long t
 
 % uplaod
 \subsection{Phase 4: Uploading}
-In uploading phase, we measure the latency by the network bandwith since our recording server is deployed in AWS EC2. The time elasped of uploading phase is detemined by the recording duration, or size of video file size. Thus, we will determine our time elapsed by measuring how many MB can be sent per second(i.e how fast is the network bandwidth of AWS EC2). The video SPEC has resolution of 1920x1080, 15 FPS and video duration of 300s. The video file size is about 495MB. We repeat the experiment for 50 times. As shown in Fig.~\ref{fig:result-p4-1}, the averge upload time is 7583ms. In other word, the bandwidth of AWS EC2 is 73.637MB per second or we can say that it takes averge 25.277ms to upload every 1 second of video.
+In uploading phase, we measure the latency by the network bandwith since our recording server is deployed in AWS EC2. The time elasped of uploading phase is detemined by the recording duration, or size of video file. Thus, we will determine our time elapsed by measuring how many MB can be sent per second(i.e how fast is the network bandwidth of AWS EC2). The video SPEC has resolution of 1920x1080, 15 FPS and video duration of 300s. The video file size is about 495MB. We repeat the experiment for 50 times. As shown in Fig.~\ref{fig:result-p4-1}, the average upload time is 7583ms. In other words, the bandwidth of AWS EC2 is 73.637MB per second or we can say that it takes average 25.277ms to upload every 1 second of video.
 
 \begin{figure}[H]
     \centering
@@ -236,10 +236,10 @@ In uploading phase, we measure the latency by the network bandwith since our rec
 \end{figure}
 
 \subsection{Observation}
-Phase 1 has averge delay of 902.856ms and Phase 2 has averge delay of 6408ms. Phase 4 has averge network bandwidth of 73.637MB/s. We can see that the bottleneck of the whole recording process is caused by building connection if the video file is small. But If the duration of video file exceed 283s then upload time will be the bottleneck. As for user perspective, we expect that users concern more about the delay caused by Phase 1 + 2. So it might be better to improve the delay in Phase 1 + 2. Becuse it is usual that we care more about how long we have to wait to start the recording task.
+Phase 1 has average delay of 902.856ms and Phase 2 has average delay of 6408ms. Phase 4 has average network bandwidth of 73.637MB/s. We can see that the bottleneck of the whole recording process is caused by building connection if the video file is small. But if the duration of video file exceeds 283s then upload time will be the bottleneck. As for user perspective, we expect that users concern more about the delay caused by Phase 1 + 2. So it may be better to improve the delay in Phase 1 + 2. Becuse it is usual that we care more about how long we have to wait to start the recording task.
 
 \section{Scalability analysis}
-We have shown the detail performance of single recording task. But what if there are multiple record tasks executing at the same time. Here we will show another bottleneck of the whole system. Recording process in recording server is the most resource-consuming task in the system. So we will test the performance of it by running different amount of tasks at the same time in recording server. As mentioned in Chapter 3, Our Recording server runs in AWS EC2. Operating System of EC2 VM is Ubuntu22.04. CPU is single Intel(R) Xeon(R) CPU E5-2676 v3 @ 2.40GH. RAM has size of 1 GB. As shown in Fig.~\ref{fig:result-scalability}, X-axis represents how many task is running at the same time. Y-axis represents the percentage of each components, such as Averge CPU usage, Averge RAM usage and Maximum CPU usage. Each number of task runs 5 times then calculate its average. We find that current server is only capable of running less than 5 task at the same time, if we don’t want CPU usage exceed 70\% to make sure the stability of server. Although we have characteristic of automation and cloud-based in this system, scalability is what we need to improve in the future work.
+We have shown the detail performance of single recording task. But what if there are multiple record tasks executing at the same time. Here we will show another bottleneck of the whole system. Recording process in recording server is the most resource-consuming task in the system. So we will test the performance of it by running different amount of tasks at the same time in recording server. As mentioned in Chapter 3, Our Recording server runs in AWS EC2. Operating System of EC2 VM is Ubuntu22.04. CPU is single Intel(R) Xeon(R) CPU E5-2676 v3 @ 2.40GH. RAM has size of 1 GB. As shown in Fig.~\ref{fig:result-scalability}, X-axis represents how many tasks are running at the same time. Y-axis represents the percentage of each components, such as Average CPU usage, Average RAM usage and Maximum CPU usage. Each number of task runs 5 times then calculate its average. We find that current server is only capable of running less than 5 task at the same time, if we don't want CPU usage exceed 70\% to make sure the stability of server. Although we have characteristic of automation and cloud-based in this system, scalability is what we need to improve in the future work.
 
 \begin{figure}[H]
     \centering
